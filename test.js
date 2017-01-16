@@ -6,7 +6,8 @@ const packageJSON = require('./package.json');
 
 const webpackContext = {
   cacheable: function(){},
-  exec: function(){}
+  exec: function(){},
+  addDependency: function(){}
 };
 
 const manifestLoader = loader.bind(webpackContext);
