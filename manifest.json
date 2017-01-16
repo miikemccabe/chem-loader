@@ -1,0 +1,11 @@
+{
+  "name": "Test Manifest",
+  "author": "Donald Drumpf",
+  "manifest_version": 2,
+  "minimum_chrome_version": "23",
+  "description": "This is a test manifest",
+  "background": {
+      "scripts": ["js/eventPage.js"],
+		  "persistent": false
+  }
+}
