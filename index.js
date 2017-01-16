@@ -11,8 +11,15 @@ module.exports = function(source) {
   manifest.version = packageJSON.version;
 
   const query = utils.parseQuery(this.query);
+
+  if(query.useName) {
+    manifest.name = packageJSON.name;
+  }
   if(query.useDescription) {
     manifest.description = packageJSON.description;
+  }
+  if(query.useAuthor === true) {
+    manifest.author = packageJSON.author;
   }
   return JSON.stringify(manifest, null, '\t');
 }
