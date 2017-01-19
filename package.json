@@ -1,7 +1,7 @@
 {
   "name": "ceml",
   "version": "0.1.0",
-  "description": "Webpack loader for loading Google Chrome Extension manifest.js with the current version number from package.js",
+  "description": "Webpack loader for loading Google Chrome Extension manifest.json with the current version number from package.json",
   "main": "index.js",
   "scripts": {
     "test": "mocha test"
