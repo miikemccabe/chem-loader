@@ -1,7 +1,7 @@
 {
-  "name": "chrome-manifest-loader",
+  "name": "ceml",
   "version": "1.0.1",
-  "description": "Webpack loader for loading Google Chrome Extension manifest.js with current version number from package.js",
+  "description": "Webpack loader for loading Google Chrome Extension manifest.js with the current version number from package.js",
   "main": "index.js",
   "scripts": {
     "test": "mocha test"
@@ -10,12 +10,13 @@
     "chrome",
     "webpack",
     "extension",
-    "loader"
+    "loader",
+    "manifest"
   ],
   "author": "Mike McCabe <mrmikemccabe@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "loader-utils": "^0.2.16"    
+    "loader-utils": "^0.2.16"
   },
   "devDependencies": {
     "mocha": "^3.2.0"
