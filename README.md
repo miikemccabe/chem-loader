@@ -9,8 +9,8 @@ The loader also gives you the option of using the name,
 description and author from your project's package.json.
 
 This loader does not write the output to file. You're 
-expected to pass the results of this loader to a file-
-writing loader such as [file-loader](https://www.npmjs.com/package/file-loader)
+expected to pass the results of this loader to a file-writing 
+loader such as [file-loader](https://www.npmjs.com/package/file-loader)
 
 ## How to use
 
@@ -22,7 +22,7 @@ npm install ceml --save-dev
 
 ### When requiring files
 ```js
-require('file?name=[name].json!chrome-manifest-loader?useDescription=true&useAuthor=true!./src/manifest.json');
+require('file?name=[name].json!ceml?useDescription=true&useAuthor=true!./src/manifest.json');
 ```
 
 ## Options
