@@ -1,6 +1,6 @@
-## ceml (Chrome Extension Manifest Loader)
+## chem-loader (CHrome Extension Manifest Loader)
 
-ceml is a webpack loader for developing Chrome Extensions.
+chem-loader is a webpack loader for developing Chrome Extensions.
 It takes your manifest file and sets the version to the
 same as your project's package.json. This means you don't
 need to keep them both in sync.
@@ -17,16 +17,16 @@ loader such as [file-loader](https://www.npmjs.com/package/file-loader)
 #### Installation
 
 ```
-npm install ceml --save-dev
+npm install chem-loader --save-dev
 ```
 
 #### Require or import your manifest.json
 ```js
-require('file?name=[name].json!ceml?useDescription=true&useAuthor=true!./src/manifest.json');
+require('file?name=[name].json!chem-loader?useDescription=true&useAuthor=true!./src/manifest.json');
 ```
 or
 ```js
-import 'file?name=[name].json!ceml?useDescription=true&useAuthor=true!./src/manifest.json';
+import 'file?name=[name].json!chem-loader?useDescription=true&useAuthor=true!./src/manifest.json';
 ```
 
 ### Options
