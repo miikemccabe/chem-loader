@@ -20,10 +20,12 @@ const webpackBaseConfig = {
   module: {
     rules: [{
       test: /\.json$/,
-      use: [
-        'file-loader?name=[name].json',
-        '__this-loader'
-      ]
+      use: [{
+        loader: 'file-loader?name=[name].json'
+      }, {
+        loader: '__this-loader',
+        options: {}
+      }]
     }]
   }
 };
@@ -35,7 +37,7 @@ describe('chrome-manifest-loader', function () {
   });
 
   it('Manifest version should match package.json', function (done) {
-    const config = webpackBaseConfig;
+    const config = Object.assign({}, webpackBaseConfig);
     webpack(config, function(err, stats) {
         assert.equal(err, null);
         assert.equal(stats.hasErrors(), false);
@@ -50,19 +52,8 @@ describe('chrome-manifest-loader', function () {
   });
 
   it('Manifest name should match package.json', function (done) {
-    const config = Object.assign({}, webpackBaseConfig, {
-      module: {
-        rules: [{
-          test: /\.json$/,
-          use: [{
-            loader: 'file-loader?name=[name].json'
-          }, {
-             loader: '__this-loader',
-             options: { useName : true }
-          }]
-        }]
-      }
-    });
+    const config = Object.assign({}, webpackBaseConfig);
+    config.module.rules[0].use[1].options.useName = true;
     webpack(config, function(err, stats) {
         assert.equal(err, null);
         assert.equal(stats.hasErrors(), false);
@@ -77,19 +68,8 @@ describe('chrome-manifest-loader', function () {
   });
 
   it('Manifest description should match package.json', function (done) {
-    const config = Object.assign({}, webpackBaseConfig, {
-      module: {
-        rules: [{
-          test: /\.json$/,
-          use: [{
-            loader: 'file-loader?name=[name].json'
-          }, {
-             loader: '__this-loader',
-             options: { useDescription : true }
-          }]
-        }]
-      }
-    });
+    const config = Object.assign({}, webpackBaseConfig);
+    config.module.rules[0].use[1].options.useDescription = true;
     webpack(config, function(err, stats) {
         assert.equal(err, null);
         assert.equal(stats.hasErrors(), false);
@@ -104,19 +84,8 @@ describe('chrome-manifest-loader', function () {
   });
 
   it('Manifest author should match package.json', function (done) {
-    const config = Object.assign({}, webpackBaseConfig, {
-      module: {
-        rules: [{
-          test: /\.json$/,
-          use: [{
-            loader: 'file-loader?name=[name].json'
-          }, {
-             loader: '__this-loader',
-             options: { useAuthor : true }
-          }]
-        }]
-      }
-    });
+    const config = Object.assign({}, webpackBaseConfig);
+    config.module.rules[0].use[1].options.useAuthor = true;
     webpack(config, function(err, stats) {
         assert.equal(err, null);
         assert.equal(stats.hasErrors(), false);
@@ -131,19 +100,8 @@ describe('chrome-manifest-loader', function () {
   });
 
   it('Should still work if an unknown option is supplied', function (done) {
-    const config = Object.assign({}, webpackBaseConfig, {
-      module: {
-        rules: [{
-          test: /\.json$/,
-          use: [{
-            loader: 'file-loader?name=[name].json'
-          }, {
-             loader: '__this-loader',
-             options: { useJibberish : true }
-          }]
-        }]
-      }
-    });
+    const config = Object.assign({}, webpackBaseConfig);
+    config.module.rules[0].use[1].options.useJibberish = true;
     webpack(config, function(err, stats) {
         assert.equal(err, null);
         assert.equal(stats.hasErrors(), false);
@@ -158,19 +116,8 @@ describe('chrome-manifest-loader', function () {
   });
 
   it('Should error if file can\'t be found', function (done) {
-    const config = Object.assign({}, webpackBaseConfig, {
-      entry: entryFilePathError,
-      module: {
-        rules: [{
-          test: /\.json$/,
-          use: [{
-            loader: 'file-loader?name=[name].json'
-          }, {
-             loader: '__this-loader'
-          }]
-        }]
-      }
-    });
+    const config = Object.assign({}, webpackBaseConfig);
+    config.entry = entryFilePathError;
     webpack(config, function(err, stats) {
         assert.equal(err, null);
         assert.equal(stats.hasErrors(), true);
