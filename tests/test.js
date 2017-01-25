@@ -1,12 +1,12 @@
 const assert = require('assert');
 const loader = require('./../lib/index.js');
-const manifest = require('./src/manifest.json');
 const packageJSON = require('./../package.json');
 const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 
 const entryFilePath = path.join(__dirname, 'src/entry.js');
+const entryFilePathError = path.join(__dirname, 'src/entry.error.js');
 const outputDirPath = path.join(__dirname, 'build');
 const outputFileName = 'output.js';
 const outputFilePath = path.join(outputDirPath, outputFileName);
@@ -29,6 +29,10 @@ const webpackBaseConfig = {
 };
 
 describe('chrome-manifest-loader', function () {
+
+  beforeEach('Clear contents of manifest.json', function(done) {
+    fs.writeFile(path.join(outputDirPath, 'manifest.json'), '', done);
+  });
 
   it('Manifest version should match package.json', function (done) {
     const config = webpackBaseConfig;
@@ -150,6 +154,27 @@ describe('chrome-manifest-loader', function () {
           assert.equal(given, expected);
           done();
         })
+    });
+  });
+
+  it('Should error if file can\'t be found', function (done) {
+    const config = Object.assign({}, webpackBaseConfig, {
+      entry: entryFilePathError,
+      module: {
+        rules: [{
+          test: /\.json$/,
+          use: [{
+            loader: 'file-loader?name=[name].json'
+          }, {
+             loader: '__this-loader'
+          }]
+        }]
+      }
+    });
+    webpack(config, function(err, stats) {
+        assert.equal(err, null);
+        assert.equal(stats.hasErrors(), true);
+        done();
     });
   });
 });
