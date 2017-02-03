@@ -33,7 +33,7 @@ const webpackBaseConfig = {
 describe('chrome-manifest-loader', function () {
 
   beforeEach('Clear contents of manifest.json', function(done) {
-    fs.writeFile(path.join(outputDirPath, 'manifest.json'), '', done);
+    fs.writeFile(path.join(outputDirPath, 'manifest.json'), '', 'utf8', done);
   });
 
   it('Manifest version should match package.json', function (done) {
